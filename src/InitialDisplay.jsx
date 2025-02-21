@@ -1,4 +1,7 @@
+import { useState } from "react";
+
 export default function InitialDisplay(){
+    const [inputText, setInputText] = useState("");
     return (
         <div 
             style={{
@@ -17,8 +20,22 @@ export default function InitialDisplay(){
                     fontWeight: "bold" 
                 }}
             >
-                Text Test!
+                Enter a URL:
             </p>
+            <input  
+                type="text"
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                placeholder="Enter a URL..."
+                style={{
+                    padding: "8px",
+                    width: "250px",
+                    borderRadius: "5px",
+                    border: "1px solid #ccc",
+                    textAlign: "center",
+                    merginTop: "10px"
+                }}
+            />
             <button 
                 style={{
                     marginTop: "10px",
@@ -29,8 +46,9 @@ export default function InitialDisplay(){
                     borderRadius: "5px",
                     cursor: "pointer"
                 }}
+                onClick={() => alert(`Entered URL: ${inputText}`)}
             >
-                Button Test
+                Submit
             </button>
         </div>
     );
