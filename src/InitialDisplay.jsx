@@ -1,7 +1,23 @@
 import { useState } from "react";
 
 export default function InitialDisplay(){
-    const [inputText, setInputText] = useState("");
+    const [subreddit, setSubreddit] = useState("");
+    const [error, setError] = useState("");
+
+    const validateSubredditName = (name) => {
+        const subredditRegex = /^[A-Za-z0-9_]{3,21}$/;
+        return subredditRegex.test(name);
+    };
+
+    const handleSubmit = () => {
+        if (validateSubredditName(subreddit)){
+            alert(`Entered Subreddit: ${subreddit}`);
+            setError(""); // clear any errors previously encounter
+        } else {
+            setError("Please enter a valid Subreddit name.");
+        }
+    };
+
     return (
         <div 
             style={{
@@ -24,9 +40,9 @@ export default function InitialDisplay(){
             </p>
             <input  
                 type="text"
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                placeholder="Enter a URL..."
+                value={subreddit}
+                onChange={(e) => setSubreddit(e.target.value)}
+                placeholder="Enter a subreddit name..."
                 style={{
                     padding: "8px",
                     width: "250px",
@@ -36,6 +52,7 @@ export default function InitialDisplay(){
                     merginTop: "10px"
                 }}
             />
+            {error && <p style={{ color: "red", margenTop: "10px" }}>{error}</p>}
             <button 
                 style={{
                     marginTop: "10px",
@@ -46,7 +63,7 @@ export default function InitialDisplay(){
                     borderRadius: "5px",
                     cursor: "pointer"
                 }}
-                onClick={() => alert(`Entered URL: ${inputText}`)}
+                onClick={handleSubmit}
             >
                 Submit
             </button>
