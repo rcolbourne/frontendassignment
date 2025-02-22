@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useSubredditPosts from "./useSubredditPosts";
+import useFavorites from "./useFavorites";
 
 export default function InitialDisplay() {
     const {
@@ -7,6 +8,7 @@ export default function InitialDisplay() {
     } = useSubredditPosts();
 
     const [expandedPosts, setExpandedPosts] = useState({});
+    const {favorites, toggleFavorite}=useFavorites();
 
     /* function to toggle the expanded posts - TODO: fully comment */
     const toggleExpand = (id) => {
@@ -71,7 +73,7 @@ export default function InitialDisplay() {
             </div>
 
             {/* Right Side Starts - This side is for the subreddit posts */}
-            <div style={{ width: "70%", padding: "20px", overflowY: "auto" }}>
+            <div style={{ width: "80%", padding: "20px", overflowY: "auto" }}>
                 <h2>Posts from r/{subreddit}</h2>
                 {loading && <p>Loading posts...</p>}
                 {!loading && postIds.length === 0 && <p>No posts found.</p>}
@@ -106,6 +108,7 @@ export default function InitialDisplay() {
                                                 {postDetails[id].selftext}
                                             </p>
                                             {postDetails[id].selftext.length > 300 && (
+                                            <div> 
                                                 <button 
                                                     onClick={() => toggleExpand(id)} 
                                                     style={{
@@ -120,7 +123,23 @@ export default function InitialDisplay() {
                                                 >
                                                     {expandedPosts[id] ? "Show Less" : "Show More"}
                                                 </button>
-                                            )}
+                                                <button 
+                                                    onClick={() => toggleFavorite(id)}
+                                                    style={{
+                                                        marginTop: "5px",
+                                                        marginLeft: "5px",
+                                                        padding: "5px 10px",
+                                                        backgroundColor: favorites.has(id) ? "red" : "green",
+                                                        color: "white",
+                                                        border: "none",
+                                                        borderRadius: "3px",
+                                                        cursor: "pointer"
+                                                    }}
+                                                >
+                                                    {favorites.has(id) ? "Unfavorite?" : "Favorite?"}
+                                                </button>
+                                            </div>  
+                                        )}
                                         </div>
                                     )}
                                 </div>
