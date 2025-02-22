@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useSubredditPosts from "./subredditPostManager";
+import useSubredditPosts from "./useSubredditPosts";
 
 export default function InitialDisplay() {
     const {
