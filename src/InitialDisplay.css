@@ -1,0 +1,104 @@
+/*
+FILE:           InitialDisplay.css
+PROJECT:        Front End Programming Assignment - SENG3080 - Advanced Web Frameworks
+PROGRAMMER:     Richard Colbourne
+FIRST VERSION:  February 22, 2025
+DESCRIPTION:    Styling for the InitialDisplay
+*/
+
+/* Layout */
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Left Panel - User Input */
+.left-panel {
+    width: 20%;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-panel p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.input-box {
+    padding: 8px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.error-text {
+    color: red;
+    margin-top: 10px;
+}
+
+.submit-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Right Panel - Posts */
+.right-panel {
+    width: 40%;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.post-list li {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.post-title {
+    font-weight: bold;
+}
+
+.post-content {
+    white-space: pre-wrap;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
+.expand-button, .favorite-button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.expand-button {
+    background-color: gray;
+}
+
+.favorite-button {
+    margin-left: 5px;
+}
+
+.favorite-true {
+    background-color: red;
+}
+
+.favorite-false {
+    background-color: green;
+}

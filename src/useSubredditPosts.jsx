@@ -1,3 +1,11 @@
+/*
+FILE:           useSubredditPost.jsx
+PROJECT:        Front End Programming Assignment - SENG3080 - Advanced Web Frameworks
+PROGRAMMER:     Richard Colbourne
+FIRST VERSION:  February 22, 2025
+DESCRIPTION:    Manages the fetching and storing of subreddit posts
+*/
+
 import { useState, useEffect } from "react";
 
 export default function useSubredditPosts() {
@@ -7,13 +15,25 @@ export default function useSubredditPosts() {
     const [postDetails, setPostDetails] = useState({});
     const [loading, setLoading] = useState(false);
 
-    /* function to validate the user input is a valid subreddit name (format only) - TODO: fully comment */
+    //
+    //  Name    : validateSubredditName
+    //  Purpose : Validates the formatting is valid for a subreddit name
+    //  Inputs  : name - the name of the subreddit name to validate
+    //  Outputs : none
+    //  Returns : true if valid, false otherwise
+    //
     const validateSubredditName = (name) => {
         const subredditRegex = /^[A-Za-z0-9_]{3,21}$/;
         return subredditRegex.test(name);
     };
 
-    /* function to fetch subreddit posts - TODO: fully comment */
+    //
+    //  Name    : fetchSubredditPosts
+    //  Purpose : Fetches the subreddit post list
+    //  Inputs  : none
+    //  Outputs : Updates postIds and reset postDetails
+    //  Returns : nothing
+    //
     const fetchSubredditPosts = async () => {
         if (!validateSubredditName(subreddit)) {
             setError("Please enter a valid subreddit name.");
@@ -42,7 +62,13 @@ export default function useSubredditPosts() {
         setLoading(false);
     };
 
-    /* function to get the post details after the IDs are fetched - TODO: fully comment */
+    //
+    //  Name    : fetchPostDetails
+    //  Purpose : Fetches the details for each post
+    //  Inputs  : none
+    //  Outputs : Updates postDetails with fetched information
+    //  Returns : nothing
+    //
     const fetchPostDetails = async () => {
         const details = {};
         for (const id of postIds) {
@@ -59,7 +85,13 @@ export default function useSubredditPosts() {
         setPostDetails(details);
     };
 
-    /* trigger to get post details when the postIds array changes - TODO: fully comment */
+    //
+    //  Name    : useEffect (fetchPostDetails)
+    //  Purpose : Triggers the fetching of details for each post
+    //  Inputs  : postIds - the list of post IDs to fetch details for
+    //  Outputs : Calls fetchPostDetails when postIds is updated
+    //  Returns : nothing
+    //
     useEffect(() => {
         if (postIds.length > 0) {
             fetchPostDetails();
