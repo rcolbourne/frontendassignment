@@ -43,23 +43,24 @@ export default function useSubredditPosts() {
     };
 
     /* function to get the post details after the IDs are fetched - TODO: fully comment */
-    useEffect(() => {
-        const fetchPostDetails = async () => {
-            const details = {};
-            for (const id of postIds) {
-                try {
-                    const response = await fetch(`https://www.reddit.com/comments/${id}.json`);
-                    const data = await response.json();
-                    if (data[0]?.data?.children[0]?.data) {
-                        details[id] = data[0].data.children[0].data;
-                    }
-                } catch (err) {
-                    console.error(`Error fetching post ${id}`, err);
+    const fetchPostDetails = async () => {
+        const details = {};
+        for (const id of postIds) {
+            try {
+                const response = await fetch(`https://www.reddit.com/comments/${id}.json`);
+                const data = await response.json();
+                if (data[0]?.data?.children[0]?.data) {
+                    details[id] = data[0].data.children[0].data;
                 }
+            } catch (err) {
+                console.error(`Error fetching post ${id}`, err);
             }
-            setPostDetails(details);
-        };
+        }
+        setPostDetails(details);
+    };
 
+    /* trigger to get post details when the postIds array changes - TODO: fully comment */
+    useEffect(() => {
         if (postIds.length > 0) {
             fetchPostDetails();
         }
